@@ -6,7 +6,7 @@ function photographerTemplate(data) {
   function getUserCardDOM() {
     const article = document.createElement("article");
     const lien = document.createElement("a");
-    lien.href = `photographer.html?id=${id}`;
+    lien.href = `./photographer.html?id=${id}`;
     lien.classList.add("focused-area");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
