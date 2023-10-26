@@ -65,4 +65,34 @@
   const photographerArtcileRight = await photographerCardRight();
   photographHeaderLeft.appendChild(photographerArticleLeft);
   photographHeaderRight.appendChild(photographerArtcileRight);
+
+  async function galleryGrid() {
+    const response = await fetch("data/photographers.json");
+    const data = await response.json();
+
+    const photos = data.media;
+
+    const photo = photos.find((item) => item.photographerId === id);
+
+    if (photo) {
+      const { id, photographerId, title, image, likes, date, price } = photo;
+
+      const picture = `assets/images/${photographerId}/${image}`;
+
+      const article = document.createElement("article");
+      const img = document.createElement("img");
+      img.setAttribute("src", picture);
+      img.setAttribute("alt", "");
+      img.classList.add("artist-pic");
+
+      console.log(article);
+
+      article.appendChild(img);
+      return article;
+    }
+  }
+
+  const galleryGridImages = document.querySelector(".gallery");
+  const galleryArticle = await galleryGrid();
+  galleryGridImages.appendChild(galleryArticle);
 })();
