@@ -102,14 +102,56 @@ h1 {
   color: #757575;
 }
 
-/* .gallery {
-  height: 500px;
-}
-
-.gallery article {
-  height: 100%;
-}
-
 .artist-pic {
-  height: 200px;
-} */
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.artist-video {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.photo-grid {
+  margin: 100px 0;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em 10em;
+}
+
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 100px;
+}
+
+.legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legend h2 {
+  color: #901c1c;
+}
+
+.likes {
+  color: #901c1c;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.likes-div {
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.fa-heart {
+  color: #901c1c;
+}
