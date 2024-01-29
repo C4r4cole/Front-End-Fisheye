@@ -155,3 +155,36 @@ h1 {
 .fa-heart {
   color: #901c1c;
 }
+
+.tarif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #db8876;
+  position: fixed;
+  font-size: 1.2rem;
+  font-weight: 900;
+  bottom: 0px; /* Ajustez la distance depuis le bas selon vos besoins */
+  right: 10px; /* Ajustez la distance depuis la droite selon vos besoins */
+  width: 376px;
+  height: 89px;
+  z-index: 100;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none; /* Pour empêcher le redimensionnement */
+  height: 200px;
+}
+
+#main-photographer-page {
+  z-index: 1;
+  position: relative;
+}

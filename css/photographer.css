@@ -1,76 +1,139 @@
-#contact_modal {
-    display: none;
+#contact_modal,
+#lightbox {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 3%;
+  z-index: 3;
+}
+
+#lightbox {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background: white;
+  justify-content: space-around;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+  z-index: 2;
+}
+
+.chevron {
+  font-size: 4rem;
+  color: #901c1c;
+}
+
+.cross {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+}
+
+.left-arrow {
+  display: flex;
+  align-items: center;
+}
+
+.right-arrow {
+  display: flex;
+  align-items: center;
+}
+
+.photo-center {
+  width: 80%;
+  height: 80%;
+}
+
+.photo-center .artist-pic {
+  height: 100%;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30px;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+  font-size: 54px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.modal header h3 {
+  font-size: 54px;
+  margin: 0;
+  font-weight: normal;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
 }

@@ -4,8 +4,6 @@ async function getPhotographers() {
 
   const photographers = data.photographers;
 
-  console.log(photographers);
-
   return {
     photographers,
   };
@@ -16,7 +14,7 @@ async function displayData(photographers) {
 
   photographers.forEach((photographer) => {
     const photographerModel = photographerTemplate(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
+    const userCardDOM = photographerModel.getUserCardDOM(); //je ne trouve aucun endroit ou a été déclaré cette fonction getUserCardDOM
     photographersSection.appendChild(userCardDOM);
   });
 }

@@ -19,31 +19,61 @@
     <header>
       <img src="assets/images/logo.png" class="logo" />
     </header>
-    <main id="main">
+    <main id="main-photographer-page">
       <div class="photograph-header">
         <div class="photograph-header_left"></div>
-        <button class="contact_button" onclick="displayModal()">
+        <button class="contact_button" onclick="displayModal('contact_modal')">
           Contactez-moi
         </button>
         <div class="photograph-header_right"></div>
       </div>
       <article class="gallery-container"></article>
     </main>
+    <div id="overlay"></div>
+    <div id="lightbox">
+      <div class="left-arrow" onclick="previousImage()">
+        <i class="fa-solid fa-chevron-left chevron"></i>
+      </div>
+      <div class="photo-center"></div>
+      <div class="right-arrow" onclick="nextImage()">
+        <img
+          class="cross"
+          src="assets/icons/close_red.svg"
+          onclick="closeModal('lightbox')"
+        />
+        <i class="fa-solid fa-chevron-right chevron"></i>
+      </div>
+    </div>
     <div id="contact_modal">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
+          <div class="contact-div">
+            <h2 id="contact-name">Contactez-moi</h2>
+            <h3 id="name-form"></h3>
           </div>
-          <button class="contact_button">Envoyer</button>
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal('contact_modal')"
+          />
+        </header>
+        <form class="contact-form">
+          <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="name" name="name" required />
+            <label for="name">Nom :</label>
+            <input type="text" id="prenom" name="name" required />
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" required />
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="button" onclick="submitForm()" class="contact_button">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>
+    <script src="./scripts/templates/lightbox.js"></script>
     <script src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
   </body>
