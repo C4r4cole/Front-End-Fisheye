@@ -1,0 +1,14 @@
+addeventlistener sur l'objet window
+lancer la fonction quand la touche left du clavier est relachée
+
+Etape 8 : afficher et gérer les likes
+
+1 - Récupérer toute la div dans laquelle il y a le coeur et le nombre de likes
+2 - Stocker cette div dans une variable
+3 - Ajouter un EventListener au click sur cette div
+4 - Au click, il faut incrémenter Likes de 1
+        - j'ai déjà fait un test avec coeur.textContent = Likes + 1 (pages/photographers.js - ligne 101)
+5 - il va falloir créer une div totalLikes
+6 - il faudra lui ajouter la classlist "total-likes"
+7 - récupérer cette div et la stocker dans une variable
+8 - 
