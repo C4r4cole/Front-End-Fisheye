@@ -36,12 +36,31 @@ function photographerCardRight(photographer) {
   img.setAttribute("src", picture); // on ajoute l'attribue src à la balise image créée juste au dessus et on lui attribue la valeur stocké dans la variable picture (l'emplacement de la photo du photographe)
   img.setAttribute("alt", ""); // on lui ajoute aussi l'attribut alt et on défini sa valeur sur ""
   img.classList.add("profile-pic"); // on ajoute la class "profile-pic" à la balise img
+
+  //*******************************************
+  // J'ai ajouté pas mal de code ici
+  // *********************************************
+
+  const bottomRightLabel = document.createElement("div");
+  bottomRightLabel.classList.add("bottom-right-label");
+
   const priceDiv = document.createElement("div"); // on créé une div qu'on stock dans la variable priceDiv
   priceDiv.textContent = `${price}€ / jour`; // on donne la valeur stockée dans la variable price comme contenu de la div priceDiv
   priceDiv.classList.add("tarif"); // on ajoute la class "tarif" à la div priceDiv
 
+  const totalLikes = document.createElement("div");
+  totalLikes.textContent = "hello"; // la, il va falloir que je mette une fonction à la place de "hello". cette fonction devra additionner l'ensemble des likes des toutes les photos d'un photographe
+  totalLikes.classList.add("total-likes");
+
+  bottomRightLabel.appendChild(priceDiv);
+  bottomRightLabel.appendChild(totalLikes);
+
+  // ***************************************
+  // ***************************************
+  // ***************************************
+
   article.appendChild(img); // on rattache la balise img stockée dans la variable img à l'élément parent article créé plus tôt
-  article.appendChild(priceDiv); // on rattache la balise div stockée dans la variable priceDiv à l'élément parent article créé plus tôt
+  article.appendChild(bottomRightLabel); // on rattache la balise div stockée dans la variable priceDiv à l'élément parent article créé plus tôt
   return article; // on met fin à la fonction et on lui dit de renvoyer l'article créé précédemment
 }
 
@@ -60,40 +79,50 @@ function submitForm() {
 
 function photographerModal(photographer) {
   // on déclare la fonction photographerModal avec le paramètre photographer (Cette fonction va permettre d'afficher le nom du photographe en dessous du texte "contactez-moi" dans le formulaire)
-  const { name } = photographer;
-  const nameForm = document.getElementById("name-form");
-  nameForm.textContent = name;
+  const { name } = photographer; // on destructure l'éléments name. c'est comme si on déclarait la varibale comme ceci :
+  //const name = photographer.name
+
+  const nameForm = document.getElementById("name-form"); // On récupère la div avec l'id name-form et on la stock dans la variable nameForm
+  nameForm.textContent = name; // on donne la valeur de name comme texte de la div nameForm récupérée juste au dessus
 }
 
 function createMedia(media) {
-  const { id, photographerId, title, image, video, likes, date, price } = media;
+  // on déclare la fonction createMedia avec le paramètre media (cette fonction créera une balise vidéo ou une balise img en fonction de la nature du media que l'on voudra créer. A l'intérieur de cette balise, on viendra ajouter un attribut src défini sur l'emplacement exact des vidéos et photos d'un photographe en particulier grace à la variable photographerId)
+  const { id, photographerId, title, image, video, likes, date, price } = media; // on destructure les éléments photographerId, image et video. c'est comme si on déclarait les varibales comme ceci :
+  //const photographerId = media.photographerId
+  //const image = media.image
+  //const video = media.video
 
   if (video) {
-    const videoElement = document.createElement("video");
-    videoElement.setAttribute("controls", "true");
-    videoElement.classList.add("artist-video");
+    // si la fonction trouve un élément media.video alors on execute le code qui suit
+    const videoElement = document.createElement("video"); // on crée une balise vidéo et on la stock dans la variable videoElement
+    videoElement.setAttribute("controls", "true"); // on assigne les attributs controls et true à la variable videoElement
+    videoElement.classList.add("artist-video"); // on ajoute la class artist-video à la variable videoElement
 
-    const sourceElement = document.createElement("source");
+    const sourceElement = document.createElement("source"); // on crée une balise source et on la stock dans la variable sourceElement
     sourceElement.setAttribute(
+      // on assigne l'attribut src à la variable sourceElement et on lui donne l'emplacement de la vidéo grace au variables photographerId et video
       "src",
       `assets/images/${photographerId}/${video}`
     );
-    sourceElement.setAttribute("type", "video/mp4");
+    sourceElement.setAttribute("type", "video/mp4"); // on paramètre l'attribut type avec le type video/mp4 à la variable sourceElement
 
-    videoElement.appendChild(sourceElement);
-    return videoElement;
+    videoElement.appendChild(sourceElement); // on rattache l'élément sourceElement à l'élément parent videoElement
+    return videoElement; // on met fin à la fonction et on retourne la variable videoElement
   } else if (image) {
-    const img = document.createElement("img");
-    img.setAttribute("src", `assets/images/${photographerId}/${image}`);
-    img.setAttribute("alt", "");
-    img.classList.add("artist-pic");
-    return img;
+    // si la fonction trouve un élément media.image alors on execute le code qui suit
+    const img = document.createElement("img"); // on crée une balise img et on la stock dans la variable img
+    img.setAttribute("src", `assets/images/${photographerId}/${image}`); // on paramètre l'attribut src à la variable img et on lui ajoute l'emplacement de la photo grace aux variable photographerId et image
+    img.setAttribute("alt", ""); // on paramètre l'attribut alt à la variable img et on le défini sur ""
+    img.classList.add("artist-pic"); // on ajoute la class artist-pic à la variable img
+    return img; // on met fin à la fonction et on retourne la variable img
   }
 }
 
 function mediaCard(media) {
   const { id, photographerId, title, image, video, likes, date, price } = media;
 
+  const superCard = document.createElement("div"); //********************** ici aussi */
   const card = document.createElement("div");
   const legend = document.createElement("div");
   const titre = document.createElement("h2");
@@ -112,16 +141,24 @@ function mediaCard(media) {
   coeur.classList.add("likes");
   icon.classList.add("fa-solid", "fa-heart");
 
-  card.appendChild(legend);
+  // ***********************************
+  // code ajouté ici aussi
+  // ***********************************
+
+  likesDiv.addEventListener("click", (e) => {
+    console.log("hello");
+    coeur.textContent = likes + 1;
+  });
+
+  superCard.appendChild(card); //********************** ici aussi */
+  superCard.appendChild(legend); //********************** ici aussi */
   legend.appendChild(titre);
   legend.appendChild(likesDiv);
   likesDiv.appendChild(coeur);
   likesDiv.appendChild(icon);
-  return card;
+  return superCard;
 }
 
-//******************************/
-//******************************/
 async function getPhotographerMedia() {
   const response = await fetch("data/photographers.json");
   const data = await response.json();
@@ -157,10 +194,11 @@ async function getPhotographer() {
 
     for (const media of photographerPhotos) {
       // pas besoin de déclarer la variable de type const media = "" ?
-      const card = mediaCard(media);
-      photoGrid.appendChild(card);
+      const superCard = mediaCard(media); //********************** ici aussi */
+      const card = createMedia(media); //********************** ici aussi */
+      photoGrid.appendChild(superCard); //********************** ici aussi */
 
-      addClickEvent(card, media);
+      addClickEvent(card, media); // ici j'ai tout cassé... le click sur l'image n'ouvre plus la ligthbox... :'(
     }
 
     const galleryGridImages = document.querySelector(".gallery-container");
