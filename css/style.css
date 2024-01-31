@@ -158,7 +158,7 @@ h1 {
 
 .bottom-right-label {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background: #db8876;
   position: fixed;

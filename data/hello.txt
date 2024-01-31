@@ -12,3 +12,11 @@ Etape 8 : afficher et gérer les likes
 6 - il faudra lui ajouter la classlist "total-likes"
 7 - récupérer cette div et la stocker dans une variable
 8 - 
+
+
+Faire la somme de tous les likes du photographer (reduce || boucle for)
+récupérer la div totallikes et lui ajouter la somme calculée ci-dessus
+totalLikes.textContent = la somme 
+dans l'addeventlistener au clique sur le coeur
+somme = totalLikes.textContent (textcontent c'est du string et il faut le transformer en nombre)
+totalLikes.textcontent = somme + 1
