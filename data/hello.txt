@@ -20,3 +20,6 @@ totalLikes.textContent = la somme
 dans l'addeventlistener au clique sur le coeur
 somme = totalLikes.textContent (textcontent c'est du string et il faut le transformer en nombre)
 totalLikes.textcontent = somme + 1
+
+somme => 460
+likes + 1

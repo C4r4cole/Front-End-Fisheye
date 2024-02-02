@@ -38,9 +38,9 @@ async function photographerCardRight(photographer) {
   img.setAttribute("alt", ""); // on lui ajoute aussi l'attribut alt et on défini sa valeur sur ""
   img.classList.add("profile-pic"); // on ajoute la class "profile-pic" à la balise img
 
-  //*******************************************
+  //********************************
   // J'ai ajouté pas mal de code ici
-  // *********************************************
+  // *******************************
 
   const bottomRightLabel = document.createElement("div");
   bottomRightLabel.classList.add("bottom-right-label");
@@ -54,6 +54,7 @@ async function photographerCardRight(photographer) {
   totalLikes.classList.add("total-likes");
 
   bottomRightLabel.appendChild(totalLikes);
+  bottomRightLabel.appendChild(createHeartIcon());
   bottomRightLabel.appendChild(priceDiv);
 
   // ***************************************
@@ -120,6 +121,12 @@ function createMedia(media) {
   }
 }
 
+function createHeartIcon() {
+  const icon = document.createElement("i");
+  icon.classList.add("fa-solid", "fa-heart");
+  return icon;
+}
+
 function mediaCard(media) {
   const { id, photographerId, title, image, video, likes, date, price } = media;
 
@@ -129,7 +136,6 @@ function mediaCard(media) {
   const titre = document.createElement("h2");
   const likesDiv = document.createElement("div");
   const coeur = document.createElement("div");
-  const icon = document.createElement("i");
 
   const element = createMedia(media);
 
@@ -140,10 +146,14 @@ function mediaCard(media) {
   coeur.textContent = likes;
   likesDiv.classList.add("likes-div");
   coeur.classList.add("likes");
-  icon.classList.add("fa-solid", "fa-heart");
 
   likesDiv.addEventListener("click", (e) => {
+    if (parseInt(coeur.textContent) !== likes) return;
+
     coeur.textContent = likes + 1;
+    const sum = document.querySelector(".total-likes");
+    let sumString = sum.textContent;
+    sum.textContent = parseInt(sumString) + 1;
   });
 
   superCard.appendChild(card);
@@ -151,7 +161,7 @@ function mediaCard(media) {
   legend.appendChild(titre);
   legend.appendChild(likesDiv);
   likesDiv.appendChild(coeur);
-  likesDiv.appendChild(icon);
+  likesDiv.appendChild(createHeartIcon());
 
   addClickEvent(element, media);
 
@@ -181,6 +191,40 @@ async function getPhotographerMedia() {
   );
   return { photographer, photographerPhotos };
 }
+
+async function sortByPop() {
+  // const { id, photographerId, title, image, video, likes, date, price } = media;
+  const { photographer, photographerPhotos } = await getPhotographerMedia();
+
+  const selectList = document.getElementById("photo-select");
+
+  selectList.addEventListener("change", () => {
+    switch (selectList.value) {
+      case "date":
+        photographerPhotos.sort(function (a, b) {
+          return a.date.localeCompare(b.date);
+        });
+        console.log(photographerPhotos);
+        break;
+
+      case "title":
+        photographerPhotos.sort(function (a, b) {
+          return a.title.localeCompare(b.title);
+        });
+        console.log(photographerPhotos);
+        break;
+
+      default:
+        photographerPhotos.sort(function (a, b) {
+          return b.likes - a.likes;
+        });
+        console.log(photographerPhotos);
+        break;
+    }
+  });
+}
+
+sortByPop();
 
 async function getPhotographer() {
   const { photographer, photographerPhotos } = await getPhotographerMedia();
