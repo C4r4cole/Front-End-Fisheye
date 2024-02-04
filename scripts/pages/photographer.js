@@ -139,6 +139,8 @@ function mediaCard(media) {
 
   const element = createMedia(media);
 
+  superCard.classList.add("super-card");
+
   card.appendChild(element);
 
   legend.classList.add("legend");
@@ -192,39 +194,65 @@ async function getPhotographerMedia() {
   return { photographer, photographerPhotos };
 }
 
-async function sortByPop() {
+async function sortBy() {
   // const { id, photographerId, title, image, video, likes, date, price } = media;
   const { photographer, photographerPhotos } = await getPhotographerMedia();
 
   const selectList = document.getElementById("photo-select");
 
+  const photographerPhotosSorted = Array.from(photographerPhotos);
+
   selectList.addEventListener("change", () => {
     switch (selectList.value) {
+      case "popularity":
+        photographerPhotosSorted.sort(function (a, b) {
+          return b.likes - a.likes;
+        });
+        console.log(photographerPhotosSorted);
+        break;
+
       case "date":
-        photographerPhotos.sort(function (a, b) {
+        photographerPhotosSorted.sort(function (a, b) {
           return a.date.localeCompare(b.date);
         });
-        console.log(photographerPhotos);
+        console.log(photographerPhotosSorted);
         break;
 
       case "title":
-        photographerPhotos.sort(function (a, b) {
+        photographerPhotosSorted.sort(function (a, b) {
           return a.title.localeCompare(b.title);
         });
-        console.log(photographerPhotos);
+        console.log(photographerPhotosSorted);
         break;
 
       default:
-        photographerPhotos.sort(function (a, b) {
+        photographerPhotosSorted.sort(function (a, b) {
           return b.likes - a.likes;
         });
-        console.log(photographerPhotos);
+        console.log(photographerPhotosSorted);
         break;
     }
+    document.querySelector(".gallery-container").innerHTML = "";
+    generateGrid(photographerPhotosSorted);
   });
 }
 
-sortByPop();
+function generateGrid(mediatable) {
+  if (mediatable.length > 0) {
+    // Vérifie s'il y a des photos
+    const photoGrid = document.createElement("article");
+    photoGrid.classList.add("photo-grid");
+
+    for (const media of mediatable) {
+      const superCard = mediaCard(media);
+      photoGrid.appendChild(superCard);
+    }
+
+    const galleryGridImages = document.querySelector(".gallery-container");
+
+    galleryGridImages.appendChild(photoGrid);
+  }
+}
 
 async function getPhotographer() {
   const { photographer, photographerPhotos } = await getPhotographerMedia();
@@ -240,20 +268,13 @@ async function getPhotographer() {
   photographHeaderRight.appendChild(photographerArtcileRight);
   photographerModal(photographer);
 
-  if (photographerPhotos.length > 0) {
-    // Vérifie s'il y a des photos
-    const photoGrid = document.createElement("article");
-    photoGrid.classList.add("photo-grid");
+  generateGrid(photographerPhotos);
 
-    for (const media of photographerPhotos) {
-      const superCard = mediaCard(media);
-      photoGrid.appendChild(superCard);
-    }
+  const selectList = document.getElementById("photo-select");
 
-    const galleryGridImages = document.querySelector(".gallery-container");
-
-    galleryGridImages.appendChild(photoGrid);
-  }
+  selectList.addEventListener("click", () => {
+    sortBy();
+  });
 }
 
 getPhotographer();
