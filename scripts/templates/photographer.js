@@ -8,6 +8,7 @@ function photographerTemplate(data) {
     const lien = document.createElement("a");
     lien.href = `./photographer.html?id=${id}`;
     lien.classList.add("focused-area");
+    lien.setAttribute("alt", "");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("alt", "");

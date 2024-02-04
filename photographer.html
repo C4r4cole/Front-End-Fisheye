@@ -17,12 +17,22 @@
 
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="./index.html">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="Fisheye Home page"
+        />
+      </a>
     </header>
     <main id="main-photographer-page">
       <div class="photograph-header">
         <div class="photograph-header_left"></div>
-        <button class="contact_button" onclick="displayModal('contact_modal')">
+        <button
+          class="contact_button"
+          onclick="displayModal('contact_modal')"
+          aria-label="Contact Me"
+        >
           Contactez-moi
         </button>
         <div class="photograph-header_right"></div>
@@ -40,7 +50,11 @@
     <div id="overlay"></div>
     <div id="lightbox">
       <div class="left-arrow" onclick="previousImage()">
-        <i class="fa-solid fa-chevron-left chevron"></i>
+        <i
+          class="fa-solid fa-chevron-left chevron"
+          aria-label="previous image"
+        ></i>
+        // a revoir avec Vincent
       </div>
       <div class="photo-center"></div>
       <div class="right-arrow" onclick="nextImage()">
@@ -48,8 +62,14 @@
           class="cross"
           src="assets/icons/close_red.svg"
           onclick="closeModal('lightbox')"
+          alt="Close dialog"
         />
-        <i class="fa-solid fa-chevron-right chevron"></i>
+        // a revoir avec Vincent
+        <i
+          class="fa-solid fa-chevron-right chevron"
+          aria-label="next image"
+        ></i>
+        // a revoir avec Vincent
       </div>
     </div>
     <div id="contact_modal">

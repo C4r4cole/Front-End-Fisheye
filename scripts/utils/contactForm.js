@@ -9,6 +9,7 @@ function displayModal(id) {
     window.addEventListener("keyup", keyPressContact);
   } else {
     modal.style.display = "flex";
+    modal.setAttribute("aria-label", "image closeup view"); // a revoir avec Vincent
     window.addEventListener("keyup", keyPressLightbox);
   }
 }
