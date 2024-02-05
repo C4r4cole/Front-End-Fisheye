@@ -4,6 +4,7 @@
   },
   "scripts": {
     "dev": "http-server",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "fix": "eslint --fix **/*.js"
   }
 }
