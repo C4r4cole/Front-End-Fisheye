@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
@@ -28,11 +28,7 @@
     <main id="main-photographer-page">
       <div class="photograph-header">
         <div class="photograph-header_left"></div>
-        <button
-          class="contact_button"
-          onclick="displayModal('contact_modal')"
-          aria-label="Contact Me"
-        >
+        <button class="contact_button" aria-label="Contact Me">
           Contactez-moi
         </button>
         <div class="photograph-header_right"></div>
@@ -49,27 +45,26 @@
     </main>
     <div id="overlay"></div>
     <div id="lightbox">
-      <div class="left-arrow" onclick="previousImage()">
+      <div class="left-arrow">
         <i
           class="fa-solid fa-chevron-left chevron"
           aria-label="previous image"
         ></i>
-        // a revoir avec Vincent
+        <!-- // a revoir avec Vincent -->
       </div>
       <div class="photo-center"></div>
-      <div class="right-arrow" onclick="nextImage()">
+      <div class="right-arrow">
         <img
           class="cross"
           src="assets/icons/close_red.svg"
-          onclick="closeModal('lightbox')"
           alt="Close dialog"
         />
-        // a revoir avec Vincent
+        <!-- // a revoir avec Vincent -->
         <i
           class="fa-solid fa-chevron-right chevron"
           aria-label="next image"
         ></i>
-        // a revoir avec Vincent
+        <!-- // a revoir avec Vincent -->
       </div>
     </div>
     <div id="contact_modal">
@@ -80,8 +75,9 @@
             <h3 id="name-form"></h3>
           </div>
           <img
+            class="cross cross-form"
             src="assets/icons/close.svg"
-            onclick="closeModal('contact_modal')"
+            alt="fermer"
           />
         </header>
         <form class="contact-form">
@@ -95,14 +91,10 @@
             <label for="message">Message :</label>
             <textarea id="message" name="message" rows="4" required></textarea>
           </div>
-          <button type="button" onclick="submitForm()" class="contact_button">
-            Envoyer
-          </button>
+          <button class="contact_button">Envoyer</button>
         </form>
       </div>
     </div>
-    <script src="./scripts/templates/lightbox.js"></script>
-    <script src="./scripts/pages/photographer.js"></script>
-    <script src="./scripts/utils/contactForm.js"></script>
+    <script src="./scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>

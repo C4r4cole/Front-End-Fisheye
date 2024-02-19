@@ -1,10 +1,13 @@
-//Mettre le code JavaScript lié à la page photographer.html
+import { addClickEvent, nextImage, previousImage } from "../templates/lightbox.js";
+import { closeModal, displayModal } from "../utils/contactForm.js";
+
+// Mettre le code JavaScript lié à la page photographer.html
 const params = new URL(document.location).searchParams;
 const id = parseInt(params.get("id"));
 
 function photographerCardLeft(photographer) {
 	// on déclare la fonction photographerCardLeft avec le paramètre photographer (cette fonction permettra de créer la partie de gauche de la fiche d'identité du photographe sur la page photographe)
-	const { name, city, tagline } = photographer;
+	const {name, city, tagline} = photographer;
 
 	const article = document.createElement("article");
 	const h2 = document.createElement("h2");
@@ -20,10 +23,10 @@ function photographerCardLeft(photographer) {
 	return article;
 }
 
-async function photographerCardRight(photographer) {
-	const { photographerPhotos } = await getPhotographerMedia();
+export async function photographerCardRight(photographer) {
+	const {photographerPhotos} = await getPhotographerMedia();
 	// on déclare la fonction photographerCardRight avec le paramètre photographer (cette fonction permettra de créer la partie de droite de la fiche d'identité du photographe sur la page photographe)
-	const { portrait, price } = photographer;
+	const {portrait, price} = photographer;
 
 	const picture = `assets/photographers/${portrait}`;
 
@@ -35,6 +38,7 @@ async function photographerCardRight(photographer) {
 
 	const bottomRightLabel = document.createElement("div");
 	bottomRightLabel.classList.add("bottom-right-label");
+	bottomRightLabel.style.zIndex = "10";
 
 	const priceDiv = document.createElement("div");
 	priceDiv.textContent = `${price}€ / jour`;
@@ -53,12 +57,20 @@ async function photographerCardRight(photographer) {
 	return article;
 }
 
+// eslint-disable-next-line no-unused-vars
 function submitForm() {
 	// on déclare une fonction submitForm (cette fonction va afficher le contenu des champs dans la console)
 	const inputName = document.getElementById("name").value;
 	const inputFirstname = document.getElementById("prenom").value;
 	const inputEmail = document.getElementById("email").value;
 	const textareaMessage = document.getElementById("message").value;
+
+	const isName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/;
+
+	if(!isName.test(inputName)||!isName.test(inputFirstname)){
+		console.error("invalid name");
+		return;
+	}
 
 	console.log(inputName);
 	console.log(inputFirstname);
@@ -68,15 +80,15 @@ function submitForm() {
 
 function photographerModal(photographer) {
 	// on déclare la fonction photographerModal avec le paramètre photographer (Cette fonction va permettre d'afficher le nom du photographe en dessous du texte "contactez-moi" dans le formulaire)
-	const { name } = photographer;
+	const {name} = photographer;
 
 	const nameForm = document.getElementById("name-form");
 	nameForm.textContent = name;
 }
 
-function createMedia(media) {
+export function createMedia(media) {
 	// on déclare la fonction createMedia avec le paramètre media (cette fonction créera une balise vidéo ou une balise img en fonction de la nature du media que l'on voudra créer. A l'intérieur de cette balise, on viendra ajouter un attribut src défini sur l'emplacement exact des vidéos et photos d'un photographe en particulier grace à la variable photographerId)
-	const { id, photographerId, title, image, video, likes, date, price } = media;
+	const {photographerId, title, image, video} = media;
 
 	if (video) {
 		// si la fonction trouve un élément media.video alors on execute le code qui suit
@@ -87,7 +99,7 @@ function createMedia(media) {
 		const sourceElement = document.createElement("source");
 		sourceElement.setAttribute(
 			"src",
-			`assets/images/${photographerId}/${video}`
+			`assets/images/${photographerId}/${video}`,
 		);
 		sourceElement.setAttribute("type", "video/mp4");
 
@@ -113,7 +125,7 @@ function createHeartIcon() {
 }
 
 function mediaCard(media) {
-	const { id, photographerId, title, image, video, likes, date, price } = media;
+	const {title, likes} = media;
 
 	const superCard = document.createElement("div");
 	const card = document.createElement("div");
@@ -134,12 +146,12 @@ function mediaCard(media) {
 	likesDiv.classList.add("likes-div");
 	coeur.classList.add("likes");
 
-	likesDiv.addEventListener("click", (e) => {
+	likesDiv.addEventListener("click", () => {
 		if (parseInt(coeur.textContent) !== likes) return;
 
 		coeur.textContent = likes + 1;
 		const sum = document.querySelector(".total-likes");
-		let sumString = sum.textContent;
+		const sumString = sum.textContent;
 		sum.textContent = parseInt(sumString) + 1;
 	});
 
@@ -165,7 +177,7 @@ function getTotalLikes(media) {
 	return sumLikes;
 }
 
-async function getPhotographerMedia() {
+export async function getPhotographerMedia() {
 	const response = await fetch("data/photographers.json");
 	const data = await response.json();
 
@@ -174,14 +186,16 @@ async function getPhotographerMedia() {
 
 	const photographer = photographers.find((item) => item.id === id);
 	const photographerPhotos = medias.filter(
-		(item) => item.photographerId === id
-	);
-	return { photographer, photographerPhotos };
+		(item) => item.photographerId === id,
+	).sort(function(a, b) {
+		return b.likes - a.likes;});
+
+	return {photographer, photographerPhotos};
 }
 
 async function sortBy() {
 	// const { id, photographerId, title, image, video, likes, date, price } = media;
-	const { photographer, photographerPhotos } = await getPhotographerMedia();
+	const {photographerPhotos} = await getPhotographerMedia();
 
 	const selectList = document.getElementById("photo-select");
 
@@ -190,31 +204,27 @@ async function sortBy() {
 	selectList.addEventListener("change", () => {
 		switch (selectList.value) {
 		case "popularity":
-			photographerPhotosSorted.sort(function (a, b) {
+			photographerPhotosSorted.sort(function(a, b) {
 				return b.likes - a.likes;
 			});
-			console.log(photographerPhotosSorted);
 			break;
 
 		case "date":
-			photographerPhotosSorted.sort(function (a, b) {
+			photographerPhotosSorted.sort(function(a, b) {
 				return a.date.localeCompare(b.date);
 			});
-			console.log(photographerPhotosSorted);
 			break;
 
 		case "title":
-			photographerPhotosSorted.sort(function (a, b) {
+			photographerPhotosSorted.sort(function(a, b) {
 				return a.title.localeCompare(b.title);
 			});
-			console.log(photographerPhotosSorted);
 			break;
 
 		default:
-			photographerPhotosSorted.sort(function (a, b) {
+			photographerPhotosSorted.sort(function(a, b) {
 				return b.likes - a.likes;
 			});
-			console.log(photographerPhotosSorted);
 			break;
 		}
 		document.querySelector(".gallery-container").innerHTML = "";
@@ -240,12 +250,12 @@ function generateGrid(mediatable) {
 }
 
 async function getPhotographer() {
-	const { photographer, photographerPhotos } = await getPhotographerMedia();
+	const {photographer, photographerPhotos} = await getPhotographerMedia();
 	const photographHeaderLeft = document.querySelector(
-		".photograph-header_left"
+		".photograph-header_left",
 	);
 	const photographHeaderRight = document.querySelector(
-		".photograph-header_right"
+		".photograph-header_right",
 	);
 	const photographerArticleLeft = photographerCardLeft(photographer);
 	const photographerArtcileRight = await photographerCardRight(photographer);
@@ -261,5 +271,53 @@ async function getPhotographer() {
 		sortBy();
 	});
 }
+
+document.querySelector(".contact_button").addEventListener("click", ()=>
+	displayModal("contact_modal")
+);
+
+document.querySelector(".left-arrow").addEventListener("click",
+	previousImage
+);
+
+document.querySelector(".right-arrow").addEventListener("click",
+	nextImage
+);
+
+document.querySelector(".cross").addEventListener("click", ()=>{
+	closeModal("lightbox");
+});
+
+document.querySelector(".cross-form").addEventListener("click", ()=>{
+	closeModal("contact_modal");
+});
+
+document.querySelector(".contact-form").addEventListener("submit", (e)=>{
+	submitForm();
+	e.preventDefault();
+	closeModal("contact_modal");
+}
+);
+
+document.addEventListener("keyup", (e)=>{
+	if (e.key !== "Enter"){
+		return;
+	}
+
+	if(!document.activeElement || !document.activeElement.classList){
+		return;
+	}
+
+	const classList = [...document.activeElement.classList];
+	if (!classList.find((c) => c === "artist-pic" || c === "artist-video"
+	)){
+		return;
+	}
+	const element = document.activeElement.cloneNode(true);
+	const photoLightbox = document.querySelector(".photo-center");
+	photoLightbox.replaceChildren(element);
+	displayModal("lightbox");
+});
+
 
 getPhotographer();

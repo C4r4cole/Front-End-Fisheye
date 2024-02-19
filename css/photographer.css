@@ -13,6 +13,7 @@
   top: 0;
   background: white;
   justify-content: space-around;
+  z-index: 100;
 }
 
 #overlay {

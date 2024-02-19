@@ -1,4 +1,6 @@
-function displayModal(id) {
+import { nextImage, previousImage } from "../templates/lightbox.js";
+
+export function displayModal(id) {
 	const modal = document.getElementById(id);
 	const overlay = document.getElementById("overlay");
 
@@ -37,7 +39,7 @@ function keyPressLightbox(e) {
 	}
 }
 
-function closeModal(id) {
+export function closeModal(id) {
 	const modal = document.getElementById(id);
 	const overlay = document.getElementById("overlay");
 	modal.style.display = "none";

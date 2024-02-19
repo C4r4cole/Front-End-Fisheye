@@ -1,4 +1,4 @@
-/* global photographerTemplate */
+import { photographerTemplate } from "../templates/photographer.js";
 
 async function getPhotographers() {
 	const response = await fetch("data/photographers.json");
@@ -16,14 +16,14 @@ async function displayData(photographers) {
 
 	photographers.forEach((photographer) => {
 		const photographerModel = photographerTemplate(photographer);
-		const userCardDOM = photographerModel.getUserCardDOM(); //je ne trouve aucun endroit ou a été déclaré cette fonction getUserCardDOM
+		const userCardDOM = photographerModel.getUserCardDOM();
 		photographersSection.appendChild(userCardDOM);
 	});
 }
 
 async function init() {
 	// Récupère les datas des photographes
-	const { photographers } = await getPhotographers();
+	const {photographers} = await getPhotographers();
 	displayData(photographers);
 }
 
