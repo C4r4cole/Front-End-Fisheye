@@ -111,7 +111,7 @@ export function createMedia(media) {
 		const img = document.createElement("img");
 		img.setAttribute("src", `assets/images/${photographerId}/${image}`);
 		img.setAttribute("alt", "");
-		img.setAttribute("aria-label", `${title}, closeup view`); // a revoir avec Vincent
+		img.setAttribute("aria-label", `${title}, closeup view`);
 		img.classList.add("artist-pic");
 		return img;
 	}
@@ -120,8 +120,18 @@ export function createMedia(media) {
 function createHeartIcon() {
 	const icon = document.createElement("i");
 	icon.classList.add("fa-solid", "fa-heart");
-	icon.setAttribute("aria-label", "likes"); // a revoir avec Vincent
+	icon.setAttribute("aria-label", "likes");
+	
 	return icon;
+}
+
+function addOnlyOneLike(coeur, likes){
+	if (parseInt(coeur.textContent) !== likes) return;
+
+	coeur.textContent = likes + 1;
+	const sum = document.querySelector(".total-likes");
+	const sumString = sum.textContent;
+	sum.textContent = parseInt(sumString) + 1;
 }
 
 function mediaCard(media) {
@@ -144,15 +154,17 @@ function mediaCard(media) {
 	titre.textContent = title;
 	coeur.textContent = likes;
 	likesDiv.classList.add("likes-div");
+	likesDiv.setAttribute("tabindex", "0");
 	coeur.classList.add("likes");
 
 	likesDiv.addEventListener("click", () => {
-		if (parseInt(coeur.textContent) !== likes) return;
+		addOnlyOneLike(coeur, likes);
+	});
 
-		coeur.textContent = likes + 1;
-		const sum = document.querySelector(".total-likes");
-		const sumString = sum.textContent;
-		sum.textContent = parseInt(sumString) + 1;
+	likesDiv.addEventListener("keyup", (e) => {
+		if (e.key !== "Enter") return;
+		addOnlyOneLike(coeur, likes);
+
 	});
 
 	superCard.appendChild(card);
@@ -292,7 +304,8 @@ document.querySelector(".cross-form").addEventListener("click", ()=>{
 	closeModal("contact_modal");
 });
 
-document.querySelector(".contact-form").addEventListener("submit", (e)=>{
+document.getElementById("contact-form").addEventListener("submit", (e)=>{
+	
 	submitForm();
 	e.preventDefault();
 	closeModal("contact_modal");

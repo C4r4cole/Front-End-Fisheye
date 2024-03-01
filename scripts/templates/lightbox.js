@@ -40,7 +40,6 @@ export async function nextImage() {
 	if (!media.src) {
 		media = media.firstChild;
 	}
-	console.log(media.src);
 
 	const src = media.src.split("/").at(-1);
 
@@ -49,7 +48,6 @@ export async function nextImage() {
 	);
 	let nextPhoto = photographerPhotos.at(index + 1);
 
-	console.log(index, photographerPhotos.length);
 	if (index + 1 >= photographerPhotos.length) {
 		nextPhoto = photographerPhotos[0];
 	}
