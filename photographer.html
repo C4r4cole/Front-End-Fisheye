@@ -36,7 +36,7 @@
       <div class="sorting">
         <label for="photo-select">Trier par :</label>
         <select name="sort" id="photo-select">
-          <option value="popularity">Popularité</option>
+          <option value="popularity" hidden>Popularité</option>
           <option value="date">Date</option>
           <option value="title">Titre</option>
         </select>
@@ -67,7 +67,7 @@
         <!-- // a revoir avec Vincent -->
       </div>
     </div>
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog">
       <div class="modal">
         <header>
           <div class="contact-div">
@@ -80,24 +80,24 @@
             alt="fermer"
           />
         </header>
-        <form id="contact-form">
+        <form id="contact-form" aria-hidden="true">
           <div>
             <label for="prenom">Prénom :</label>
-            <input tabindex="0" type="text" id="name" name="name" required />
+            <input tabindex="1" type="text" id="name" name="name" required />
             <label for="name">Nom :</label>
-            <input tabindex="0" type="text" id="prenom" name="name" required />
+            <input tabindex="1" type="text" id="prenom" name="name" required />
             <label for="email">E-mail :</label>
-            <input tabindex="0" type="email" id="email" name="email" required />
+            <input tabindex="1" type="email" id="email" name="email" required />
             <label for="message">Message :</label>
             <textarea
-              tabindex="0"
+              tabindex="1"
               id="message"
               name="message"
               rows="4"
               required
             ></textarea>
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button tabindex="1" class="contact_button"">Envoyer</button>
         </form>
       </div>
     </div>

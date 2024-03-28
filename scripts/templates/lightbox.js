@@ -7,6 +7,9 @@ export async function addClickEvent(card, media) {
 		const element = createMedia(media);
 		const photoLightbox = document.querySelector(".photo-center");
 		photoLightbox.replaceChildren(element);
+		const title = document.createElement("p");
+		title.innerHTML = media.title;
+		photoLightbox.appendChild(title);
 		displayModal("lightbox");	
 
 	});
@@ -30,6 +33,9 @@ export async function previousImage() {
 	const previousPhoto = photographerPhotos.at(index - 1);
 
 	lightboxMedia.replaceChildren(createMedia(previousPhoto));
+	const title = document.createElement("p");
+	title.innerHTML = previousPhoto.title;
+	lightboxMedia.appendChild(title);
 }
 
 export async function nextImage() {
@@ -53,4 +59,7 @@ export async function nextImage() {
 	}
 
 	lightboxMedia.replaceChildren(createMedia(nextPhoto));
+	const title = document.createElement("p");
+	title.innerHTML = nextPhoto.title;
+	lightboxMedia.appendChild(title);
 }

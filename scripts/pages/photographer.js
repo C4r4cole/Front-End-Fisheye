@@ -214,26 +214,33 @@ async function sortBy() {
 	const photographerPhotosSorted = Array.from(photographerPhotos);
 
 	selectList.addEventListener("change", () => {
+		for (const element of selectList.children){
+			element.removeAttribute("hidden");
+		}
 		switch (selectList.value) {
 		case "popularity":
+			selectList.children[0].setAttribute("hidden", "");
 			photographerPhotosSorted.sort(function(a, b) {
 				return b.likes - a.likes;
 			});
 			break;
 
 		case "date":
+			selectList.children[1].setAttribute("hidden", "");
 			photographerPhotosSorted.sort(function(a, b) {
 				return a.date.localeCompare(b.date);
 			});
 			break;
 
 		case "title":
+			selectList.children[2].setAttribute("hidden", "");
 			photographerPhotosSorted.sort(function(a, b) {
 				return a.title.localeCompare(b.title);
 			});
 			break;
 
 		default:
+			selectList.children[0].setAttribute("hidden", "");
 			photographerPhotosSorted.sort(function(a, b) {
 				return b.likes - a.likes;
 			});
