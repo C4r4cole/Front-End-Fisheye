@@ -213,39 +213,40 @@ async function sortBy() {
 
 	const photographerPhotosSorted = Array.from(photographerPhotos);
 
-	selectList.addEventListener("change", () => {
-		for (const element of selectList.children){
-			element.removeAttribute("hidden");
-		}
-		switch (selectList.value) {
-		case "popularity":
-			selectList.children[0].setAttribute("hidden", "");
-			photographerPhotosSorted.sort(function(a, b) {
-				return b.likes - a.likes;
-			});
-			break;
+	const defaultChoice = document.querySelector(".default");
 
-		case "date":
-			selectList.children[1].setAttribute("hidden", "");
+	selectList.addEventListener("click", (e) => {
+		const choice = e.target.innerText;
+
+		defaultChoice.innerHTML = choice;
+
+		switch (choice) {
+		case "Date":
+			selectList.children[0].innerHTML = "Popularité";
+			selectList.children[1].innerHTML = "Titre";
 			photographerPhotosSorted.sort(function(a, b) {
 				return a.date.localeCompare(b.date);
 			});
 			break;
 
-		case "title":
-			selectList.children[2].setAttribute("hidden", "");
+		case "Titre":
+			selectList.children[0].innerHTML = "Popularité";
+			selectList.children[1].innerHTML = "Date";
 			photographerPhotosSorted.sort(function(a, b) {
 				return a.title.localeCompare(b.title);
 			});
 			break;
 
+		case "Popularité":
 		default:
-			selectList.children[0].setAttribute("hidden", "");
+			selectList.children[0].innerHTML = "Date";
+			selectList.children[1].innerHTML = "Titre";
 			photographerPhotosSorted.sort(function(a, b) {
 				return b.likes - a.likes;
 			});
 			break;
 		}
+		selectList.blur();
 		document.querySelector(".gallery-container").innerHTML = "";
 		generateGrid(photographerPhotosSorted);
 	});
@@ -284,11 +285,11 @@ async function getPhotographer() {
 
 	generateGrid(photographerPhotos);
 
-	const selectList = document.getElementById("photo-select");
+	// const selectList = document.getElementById("photo-select");
 
-	selectList.addEventListener("click", () => {
-		sortBy();
-	});
+	// selectList.addEventListener("click", () => {
+	// 	sortBy();
+	// });
 }
 
 document.querySelector(".contact_button").addEventListener("click", ()=>
@@ -339,5 +340,5 @@ document.addEventListener("keyup", (e)=>{
 	displayModal("lightbox");
 });
 
-
+sortBy();
 getPhotographer();

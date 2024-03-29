@@ -34,12 +34,14 @@
         <div class="photograph-header_right"></div>
       </div>
       <div class="sorting">
-        <label for="photo-select">Trier par :</label>
-        <select name="sort" id="photo-select">
-          <option value="popularity" hidden>Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
+        <p>Trier par :</p>
+        <div class="wrapper">
+          <div tabindex="0" class="default popularity border-li">Popularité</div>
+        <ul tabindex="0" id="photo-select">
+          <li class="date border-li">Date</li>
+          <li class="title">Titre</li>
+        </ul>
+      </div>
       </div>
       <article class="gallery-container"></article>
     </main>

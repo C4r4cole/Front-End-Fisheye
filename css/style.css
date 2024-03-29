@@ -136,7 +136,18 @@ h1 {
 }
 
 .sorting {
+  width: 300px;
   margin: 0 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sorting li {
+  padding: 10px 0;
+}
+
+.border-li {
+  border-bottom: solid 1px white;
 }
 
 .legend {
@@ -153,16 +164,6 @@ h1 {
   color: #901c1c;
   font-weight: 900;
   font-size: 1.2rem;
-}
-
-#photo-select {
-  background-color: #901c1c;
-  font-size: 18px;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  width: 170px;
 }
 
 .likes-div {
@@ -210,4 +211,49 @@ textarea {
 #main-photographer-page {
   z-index: 1;
   position: relative;
+}
+
+.wrapper {
+  position: relative;
+  background-color: #901c1c;
+  border-radius: 5px;
+  width: 170px;
+  padding: 0px 10px;
+  height: min-content;
+  cursor: pointer;
+}
+
+.wrapper ul {
+  background-color: #901c1c;
+  position: absolute;
+  display: none;
+  margin: 0;
+  font-size: 18px;
+  color: white;
+  list-style: none;
+  padding: 0;
+  right: 0;
+  top: 45px;
+  padding: 0px 10px;
+  left: 0;
+}
+
+.wrapper:focus-within ul {
+  display: block;
+  border-radius: 0 0 5px 5px;
+}
+
+.wrapper:focus-within {
+  border-radius: 5px 5px 0 0;
+}
+
+.wrapper:focus-within .default {
+  border-bottom: solid 1px white;
+}
+
+.wrapper .default {
+  font-size: 18px;
+  color: white;
+  border: none;
+  padding: 10px 0;
 }
