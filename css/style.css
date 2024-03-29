@@ -251,9 +251,19 @@ textarea {
   border-bottom: solid 1px white;
 }
 
+.wrapper:focus-within .default i {
+  transform: rotate(180deg);
+}
+
 .wrapper .default {
   font-size: 18px;
   color: white;
   border: none;
   padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-chevron-up {
+  color: white;
 }

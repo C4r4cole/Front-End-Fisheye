@@ -215,6 +215,9 @@ async function sortBy() {
 
 	const defaultChoice = document.querySelector(".default");
 
+	const chevron = document.createElement("i");
+	chevron.classList.add("fa-solid", "fa-chevron-up");
+
 	selectList.addEventListener("click", (e) => {
 		const choice = e.target.innerText;
 
@@ -222,6 +225,7 @@ async function sortBy() {
 
 		switch (choice) {
 		case "Date":
+			defaultChoice.appendChild(chevron);
 			selectList.children[0].innerHTML = "Popularité";
 			selectList.children[1].innerHTML = "Titre";
 			photographerPhotosSorted.sort(function(a, b) {
@@ -230,6 +234,7 @@ async function sortBy() {
 			break;
 
 		case "Titre":
+			defaultChoice.appendChild(chevron);
 			selectList.children[0].innerHTML = "Popularité";
 			selectList.children[1].innerHTML = "Date";
 			photographerPhotosSorted.sort(function(a, b) {
@@ -239,6 +244,7 @@ async function sortBy() {
 
 		case "Popularité":
 		default:
+			defaultChoice.appendChild(chevron);
 			selectList.children[0].innerHTML = "Date";
 			selectList.children[1].innerHTML = "Titre";
 			photographerPhotosSorted.sort(function(a, b) {
