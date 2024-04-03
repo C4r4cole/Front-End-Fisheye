@@ -253,6 +253,7 @@ async function sortBy() {
 			break;
 		}
 		selectList.blur();
+		// document.querySelector(".wrapper ul").style.display = "none";
 		document.querySelector(".gallery-container").innerHTML = "";
 		generateGrid(photographerPhotosSorted);
 	});
