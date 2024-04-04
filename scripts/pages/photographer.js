@@ -253,6 +253,53 @@ async function sortBy() {
 			break;
 		}
 		selectList.blur();
+		e.target.blur();
+		// document.querySelector(".wrapper ul").style.display = "none";
+		document.querySelector(".gallery-container").innerHTML = "";
+		generateGrid(photographerPhotosSorted);
+	});
+
+	selectList.addEventListener("keyup", (e) => {
+		if (e.key !== "Enter"){
+			return;
+		}
+		
+		const choice = e.target.innerText;
+
+
+		defaultChoice.innerHTML = choice;
+
+		switch (choice) {
+		case "Date":
+			defaultChoice.appendChild(chevron);
+			selectList.children[0].innerHTML = "Popularité";
+			selectList.children[1].innerHTML = "Titre";
+			photographerPhotosSorted.sort(function(a, b) {
+				return a.date.localeCompare(b.date);
+			});
+			break;
+
+		case "Titre":
+			defaultChoice.appendChild(chevron);
+			selectList.children[0].innerHTML = "Popularité";
+			selectList.children[1].innerHTML = "Date";
+			photographerPhotosSorted.sort(function(a, b) {
+				return a.title.localeCompare(b.title);
+			});
+			break;
+
+		case "Popularité":
+		default:
+			defaultChoice.appendChild(chevron);
+			selectList.children[0].innerHTML = "Date";
+			selectList.children[1].innerHTML = "Titre";
+			photographerPhotosSorted.sort(function(a, b) {
+				return b.likes - a.likes;
+			});
+			break;
+		}
+		selectList.blur();
+		e.target.blur();
 		// document.querySelector(".wrapper ul").style.display = "none";
 		document.querySelector(".gallery-container").innerHTML = "";
 		generateGrid(photographerPhotosSorted);
