@@ -26,17 +26,13 @@ export function displayModal(id) {
 				return;
 			}
 			
-			console.log(document.activeElement);
-			console.log("toto");
 			if (e.shiftKey) { // if shift key pressed for shift + tab combination
 				if (document.activeElement === firstFocusableElement) {
 					lastFocusableElement.focus(); // add focus for the last focusable element
 					e.preventDefault();
 				}
 			} else { // if tab key is pressed
-				console.log("a");
 				if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
-					console.log("b");
 					firstFocusableElement.focus(); // add focus for the first focusable element
 					e.preventDefault();
 				}

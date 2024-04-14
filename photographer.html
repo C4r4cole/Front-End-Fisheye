@@ -4,7 +4,10 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script
       src="https://kit.fontawesome.com/3564727c25.js"
       crossorigin="anonymous"
@@ -37,14 +40,15 @@
       <div class="sorting">
         <p>Trier par :</p>
         <div class="wrapper">
-          <div tabindex="0" class="default popularity border-li">Popularité
+          <div tabindex="0" class="default popularity border-li">
+            Popularité
             <i class="fa-solid fa-chevron-down"></i>
           </div>
-        <ul id="photo-select">
-          <li tabindex="0" class="date border-li">Date</li>
-          <li tabindex="0" class="title">Titre</li>
-        </ul>
-      </div>
+          <ul id="photo-select">
+            <li tabindex="0" class="date border-li">Date</li>
+            <li tabindex="0" class="title">Titre</li>
+          </ul>
+        </div>
       </div>
       <article class="gallery-container"></article>
     </main>
@@ -52,6 +56,7 @@
     <div id="lightbox">
       <div class="left-arrow">
         <i
+          tabindex="2"
           class="fa-solid fa-chevron-left chevron"
           aria-label="previous image"
         ></i>
@@ -60,12 +65,14 @@
       <div class="photo-center"></div>
       <div class="right-arrow">
         <img
+          tabindex="2"
           class="cross"
           src="assets/icons/close_red.svg"
           alt="Close dialog"
         />
         <!-- // a revoir avec Vincent -->
         <i
+          tabindex="2"
           class="fa-solid fa-chevron-right chevron"
           aria-label="next image"
         ></i>
@@ -102,7 +109,7 @@
               required
             ></textarea>
           </div>
-          <button tabindex="1" class="contact_button"">Envoyer</button>
+          <button tabindex="1" class="contact_button">Envoyer</button>
         </form>
       </div>
     </div>

@@ -338,12 +338,6 @@ async function getPhotographer() {
 	photographerModal(photographer);
 
 	generateGrid(photographerPhotos);
-
-	// const selectList = document.getElementById("photo-select");
-
-	// selectList.addEventListener("click", () => {
-	// 	sortBy();
-	// });
 }
 
 document.querySelector(".contact_button").addEventListener("click", ()=>
